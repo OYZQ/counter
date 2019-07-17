@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>简易计算器</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body,
+    html {
+      background-color: pink;
+    }
+
+    .column {
+      position: relative;
+      border: 5px solid #fff;
+      width: 400px;
+      height: 500px;
+      margin: 100px auto;
+    }
+
+    .column .co-top .add {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 4px;
+      display: block;
+      width: 388px;
+      height: 100px;
+      background-color: pink;
+    }
+
+    button {
+      border: 2px solid #fff;
+      height: 50px;
+      width: 90px;
+      background-color: pink;
+      margin-bottom: 8px;
+      font-weight: bolder;
+      font-size: 20px;
+    }
+
+    .co-bottom {
+      margin-top: 30px;
+      position: absolute;
+      left: 50%;
+      border: 2px solid #fff;
+      margin-left: -199px;
+      width: 388px;
+
+    }
+
+    .column .co-top .clear {
+      margin-left: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="column">
+    <div class="co-top">
+      <input type="text" class="add" value="0" id="add">
+      <button class="clear" onclick="clears()">CLEAR</button>
+      <button class="delete" onclick="deletes()">DELETE</button>
+    </div>
+    <div class="co-bottom">
+      <button class="num">1</button>
+      <button class="num">2</button>
+      <button class=num>3</button>
+      <button class="options num">*</button>
+      <button class="num">4</button>
+      <button class="num">5</button>
+      <button class="num">6</button>
+      <button class="options num">-</button>
+      <button class='num'>7</button>
+      <button class='num'>8</button>
+      <button class='num'>9</button>
+      <button class="options num">+</button>
+      <button class='num'>.</button>
+      <button class="num">0</button>
+      <button class="options num">/</button>
+      <button class="dengyu" id="dengyu" onclick="dengyu()">=</button>
+    </div>
+  </div>
+  <script>
+    var arr = [];
+    var temp = '';
+    var x;
+    var result = document.getElementById("add");
+
+    function getButton() {
+      var btns = document.getElementsByClassName("num");
+      for (let i = 0; i < btns.length; i++) {
+        btns[i].onclick = function () {
+          x = btns[i].innerHTML;
+          arr.push(x);
+          result.value = temp + arr.join('');
+        }
+      }
+    }
+
+    getButton();
+
+    function dengyu() {
+      result.value = eval(result.value);
+      temp = result.value;
+      arr = [];
+    }
+
+    function clears() {
+      result.value = 0;
+      arr = [];
+      temp = '';
+    }
+
+    function deletes() {
+      arr.splice(arr.length-1,1)
+      result.value = temp + arr.join('');
+    }
+
+  </script>
+</body>
+
+</html>
